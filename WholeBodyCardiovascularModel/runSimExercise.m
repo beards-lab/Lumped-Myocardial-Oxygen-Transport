@@ -9,7 +9,7 @@ M(1,1) = 0;
 M(2,2) = 0;
 M(3,3) = 0;
 M(4,4) = 0; 
-options = odeset('Mass',M,'RelTol',1e-8,'AbsTol',1e-7,'MaxStep',T/50);
+options = odeset('Mass',M,'RelTol',1e-8,'AbsTol',1e-8,'MaxStep',T/100);
 
 % Assume steady state in 20 then run for 30 seconds total
 % 30 secons represents a whole number of cardiac cycles for each exercise

@@ -135,8 +135,8 @@ tc_a = tc_v - Tact - 1*((tc_v-Tact)>(0.5));
 Ep = 0.050 ; %passive
 Ea = params.LEa; %active. 
 Pc = 10; % mmHg. Collagen
-sigma_a = .0975; %1.5 * 0.065. How wide gaussian is
-act = exp( -(tc_a/sigma_a)^2 );
+delta_a = .0975; %1.5 * 0.065. How wide gaussian is
+act = exp( -(tc_a/delta_a)^2 );
 P_LA  = 2.0*(Ep*(V_LA-LAV0u) + Ea*act*(V_LA-LAV0u) + Pc*exp((V_LA-V0c)/V1c)) ;
 P_RA  = 1.0*(Ep*(V_RA-RAV0u) + Ea*act*(V_RA-RAV0u) + Pc*exp((V_RA-V0c)/V1c)) ;
 

@@ -2,12 +2,7 @@
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%% Setting Run Information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-m=load('m_WholeBodyCardio.txt');
-a=load('a_WholeBodyCardio.txt');
 
-% Values in the loaded modifiers (m and a)
-% m = [0.9525    0.6383    1.0651    1.3941    0.6776    0.2656    1.1320    0.5370    1.0548    0.7192 1.0327    1.0961    0.6917    0.8869    1.0518    1.5204    0.7832];
-% a=[2.2; 0.65; 1.6; 5.0; 1.2; 1.4; 3.9;0.15];
 
 baseline_HR=64;
 Max_HR=180;
@@ -23,7 +18,7 @@ Scaled_HR3=150;
 
 [targets_rest, inputs]= targetVals_Rest();
 inputs.HR=baseline_HR;
-[params, init] = estimParametersExercise_graded(targets_rest,inputs, m, a);
+[params, init] = estimParametersExercise_graded(targets_rest,inputs);
 
 targets=targets_rest;
 
@@ -42,7 +37,7 @@ plotFit
 %Run for max exercise
 [targets_rest, inputs]= targetVals_Rest();
 inputs.HR=Max_HR;
-[params, init] = estimParametersExercise_graded(targets_rest,inputs, m, a);
+[params, init] = estimParametersExercise_graded(targets_rest,inputs);
 
 % Uncomment the following line to compare max exercise to the max exercise
 % targets
@@ -62,7 +57,7 @@ plotFit
 % Run for mild exercise 1 HR=90 bpm
 [targets_rest, inputs]= targetVals_Rest();
 inputs.HR=Scaled_HR1;
-[params, init] = estimParametersExercise_graded(targets_rest,inputs, m, a);
+[params, init] = estimParametersExercise_graded(targets_rest,inputs);
 
 printStats = true;
 targets;
@@ -73,13 +68,13 @@ Myo_Inputs_MildE1.P_LV=P_LV;
 Myo_Inputs_MildE1.P_RA=P_RA;
 Myo_Inputs_MildE1.Y=Y;
 Myo_Inputs_MildE1.t=t;
-plotFit
+%plotFit
 
 %%
 %Run for mild exercise 2 HR=120 bpm
 [targets_rest, inputs]= targetVals_Rest();
 inputs.HR=Scaled_HR2;
-[params, init] = estimParametersExercise_graded(targets_rest,inputs, m, a);
+[params, init] = estimParametersExercise_graded(targets_rest,inputs);
 
 printStats = true;
 runSimExercise
@@ -95,7 +90,7 @@ plotFit
 %Run for mild exercise 3 HR=150 bpm
 [targets_rest, inputs]= targetVals_Rest();
 inputs.HR=Scaled_HR3;
-[params, init] = estimParametersExercise_graded(targets_rest,inputs, m, a);
+[params, init] = estimParametersExercise_graded(targets_rest,inputs);
 
 printStats = true;
 runSimExercise

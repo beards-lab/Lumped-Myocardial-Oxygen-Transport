@@ -1,5 +1,4 @@
-function [params, init] = estimParametersExercise(targets,inputs, modifiers_rest, modifiers_ex_graded)
-
+function [params, init] = estimParametersExercise(targets,inputs)
     %{ 
     Assignment and/or derivation of all model parameters. 
     
@@ -391,8 +390,11 @@ Filip Jezek
 
 %% Modifying Parameters
  
-m = modifiers_rest;
-a = modifiers_ex_graded;
+%m = modifiers_rest;
+%a = modifiers_ex_graded;
+m= [0.9525    0.6383    1.0651    1.3941    0.6776    0.2656    1.1320    0.5370    1.0548    0.7192 1.0327    1.0961    0.6917    0.8869    1.0518    1.5204    0.7832];
+a=[2.2 0.65 1.6 5.0 1.2 1.4 3.9 0.15];
+
 
 
 %Activation function
@@ -444,7 +446,7 @@ params.Vw_RV  = Vw_RV;
 
 init(13) = init(13)*m(9);
 
-params.RAV0u = inputData.RAVmin*m(10);
+%params.RAV0u = inputData.RAVmin*m(10);
 params.LAV0u = inputData.LAVmin*m(11);
 params.LEa = 2.60 *m(14)*((a(7)*theta)+1);
 end 

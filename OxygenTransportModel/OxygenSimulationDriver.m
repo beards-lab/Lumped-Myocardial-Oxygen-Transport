@@ -3,17 +3,22 @@ ExerciseLevel=0;
 
 if ExerciseLevel==0
     OxygenInput=OxygenInput_Rest;
+    tper=60/64;
     RPP_fact=1;
 elseif ExerciseLevel==1
     OxygenInput=OxygenInput_MildE1;
+    tper=60/90;
     RPP_fact=1.71;
 elseif ExerciseLevel==2  
+    tper=60/120;
     OxygenInput=OxygenInput_MildE2;
     RPP_fact=2.57;
 elseif ExerciseLevel==3
+    tper=60/150;
     OxygenInput=OxygenInput_MildE3;
     RPP_fact=3.43;
 elseif ExerciseLevel==4  
+    tper=60/180;
     OxygenInput=OxygenInput_MaxE;
     RPP_fact=4.30;
 end
@@ -42,7 +47,7 @@ O2x0(11) = 0.25*C_PA;
 
 
 % simulation
- T = t; % this is the time vector from the flow simulation
+ T = OxygenInput.T; % this is the time vector from the flow simulation
 [O2t,O2x] = ode15s(@dCdT_oxygen,[0 600],O2x0,[],T,RPP_fact,MVO2_Hyp,OxygenInput);
 %%
 % state variables
@@ -60,14 +65,14 @@ O2_output.c_t3 = O2x(:,11);
 
 % volumes
 
-O2_output.v_pa = interp1(T,V_PA,mod(O2t,T(end)));
-O2_output.v_11 = interp1(T,V_11,mod(O2t,T(end)));
-O2_output.v_12 = interp1(T,V_12,mod(O2t,T(end)));
-O2_output.v_21 = interp1(T,V_21,mod(O2t,T(end)));
-O2_output.v_22 = interp1(T,V_22,mod(O2t,T(end)));
-O2_output.v_13 = interp1(T,V_13,mod(O2t,T(end)));
-O2_output.v_23 = interp1(T,V_23,mod(O2t,T(end)));
-O2_output.v_pv = interp1(T,V_PV,mod(O2t,T(end))) + 0.1; % add offset to v_pv to keep it stays positive
+O2_output.v_pa = interp1(T,OxygenInput.V_PA,mod(O2t,T(end)));
+O2_output.v_11 = interp1(T,OxygenInput.V_11,mod(O2t,T(end)));
+O2_output.v_12 = interp1(T,OxygenInput.V_12,mod(O2t,T(end)));
+O2_output.v_21 = interp1(T,OxygenInput.V_21,mod(O2t,T(end)));
+O2_output.v_22 = interp1(T,OxygenInput.V_22,mod(O2t,T(end)));
+O2_output.v_13 = interp1(T,OxygenInput.V_13,mod(O2t,T(end)));
+O2_output.v_23 = interp1(T,OxygenInput.V_23,mod(O2t,T(end)));
+O2_output.v_pv = interp1(T,OxygenInput.V_PV,mod(O2t,T(end))) + 0.1; % add offset to v_pv to keep it stays positive
 
 % concentrations
 O2_output.c_pa = O2_output.m_pa./O2_output.v_pa;
@@ -80,17 +85,17 @@ O2_output.c_23 = O2_output.m_23./O2_output.v_23;
 O2_output.c_pv = O2_output.m_pv./O2_output.v_pv;
 
 %flows
-O2_output.q_pa = interp1(T,Q_PA,mod(O2t,T(end)));
-O2_output.q_11 = interp1(T,Q_11,mod(O2t,T(end)));
-O2_output.q_m1 = interp1(T,Q_m1,mod(O2t,T(end)));
-O2_output.q_12 = interp1(T,Q_12,mod(O2t,T(end)));
-O2_output.q_21 = interp1(T,Q_21,mod(O2t,T(end)));
-O2_output.q_m2 = interp1(T,Q_m2,mod(O2t,T(end)));
-O2_output.q_22 = interp1(T,Q_22,mod(O2t,T(end)));
-O2_output.q_13 = interp1(T,Q_13,mod(O2t,T(end)));
-O2_output.q_m3 = interp1(T,Q_m3,mod(O2t,T(end)));
-O2_output.q_23 = interp1(T,Q_23,mod(O2t,T(end)));
-O2_output.q_pv = interp1(T,Q_PV,mod(O2t,T(end)));
+O2_output.q_pa = interp1(T,OxygenInput.Q_PA,mod(O2t,T(end)));
+O2_output.q_11 = interp1(T,OxygenInput.Q_11,mod(O2t,T(end)));
+O2_output.q_m1 = interp1(T,OxygenInput.Q_m1,mod(O2t,T(end)));
+O2_output.q_12 = interp1(T,OxygenInput.Q_12,mod(O2t,T(end)));
+O2_output.q_21 = interp1(T,OxygenInput.Q_21,mod(O2t,T(end)));
+O2_output.q_m2 = interp1(T,OxygenInput.Q_m2,mod(O2t,T(end)));
+O2_output.q_22 = interp1(T,OxygenInput.Q_22,mod(O2t,T(end)));
+O2_output.q_13 = interp1(T,OxygenInput.Q_13,mod(O2t,T(end)));
+O2_output.q_m3 = interp1(T,OxygenInput.Q_m3,mod(O2t,T(end)));
+O2_output.q_23 = interp1(T,OxygenInput.Q_23,mod(O2t,T(end)));
+O2_output.q_pv = interp1(T,OxygenInput.Q_PV,mod(O2t,T(end)));
 
 %% Calculate oxygen contributions per layer
 

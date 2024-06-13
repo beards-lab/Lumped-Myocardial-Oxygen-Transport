@@ -1,6 +1,7 @@
 %% Inputting flow and pressure data
-% m = [0.7978    1.0509    0.9604    1.2349    1.3601    0.6105    0.5146    1.5235    1.1013];
+% m_myo = [0.7978    1.0509    0.9604    1.2349    1.3601    0.6105    0.5146    1.5235    1.1013];
 m_myo=load("m_MyocardialPerfusion.txt");
+addpath("HumanCoronaryFlowProfile\")
 %% LOAD DATA 
 
 %specify Exercise Level
@@ -234,6 +235,7 @@ idx_last=find(t_idx,1,'last');
 
 %%
 %V_PA,V_11,V_12,V_21,V_22,V_13,V_23,V_PV,Q_PA,Q_11,Q_m1,Q_12,Q_21,Q_m2,Q_22,Q_13,Q_m3,Q_23,Q_PV
+OxygenInput.T=t;
 OxygenInput.V_PA=V_PA;
 OxygenInput.V_11=V_11;
 OxygenInput.V_12=V_12;
